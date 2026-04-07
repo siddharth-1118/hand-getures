@@ -38,13 +38,13 @@ This project is split into:
 
 ### 1. Deploy the backend to Render
 
-Create a new **Web Service** in Render using this repository and set the root directory to `vision2sense`.
+Create a new **Web Service** in Render using this repository and set the root directory to `backend`.
 
 Use these settings:
 
 - Environment: `Python 3`
 - Build command: `pip install -r requirements-render.txt`
-- Start command: `uvicorn api.index:app --host 0.0.0.0 --port $PORT`
+- Start command: `uvicorn index:app --host 0.0.0.0 --port $PORT`
 
 After deployment, confirm the backend is working by opening the Render URL in your browser. You should see a JSON response from `/`.
 
@@ -52,7 +52,7 @@ This repository includes a `runtime.txt` file to pin Render to Python 3.11, whic
 
 ### 2. Deploy the frontend to Vercel
 
-Import the same repository into Vercel and set the root directory to `vision2sense`.
+Import the same repository into Vercel and leave the root directory empty.
 
 Add this environment variable in Vercel before deploying:
 
