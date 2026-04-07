@@ -213,19 +213,26 @@ const HandTracker = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#0a0a0a] text-white p-6 space-y-8 tracking-wide">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(34,197,94,0.18),_transparent_32%),linear-gradient(180deg,_#050816_0%,_#0a0a0a_48%,_#020617_100%)] px-4 py-6 text-white sm:px-6 sm:py-8 lg:px-8">
       {/* Header */}
-      <div className="text-center space-y-2">
-        <h1 className="text-5xl font-extrabold tracking-tighter bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-          VISION2SENSE
-        </h1>
-        <p className="text-gray-400 font-medium">Real-time AI Gesture Recognition</p>
-      </div>
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 sm:gap-8">
+        <div className="space-y-3 text-center lg:text-left">
+          <div className="inline-flex items-center rounded-full border border-green-500/20 bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.35em] text-green-300 sm:text-xs">
+            Vision2Sense Live
+          </div>
+          <h1 className="bg-gradient-to-r from-green-300 via-emerald-400 to-blue-400 bg-clip-text text-3xl font-extrabold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
+            Hand Tracking That Fits Every Screen
+          </h1>
+          <p className="mx-auto max-w-2xl text-sm font-medium leading-6 text-slate-300 sm:text-base lg:mx-0">
+            Real-time gesture recognition with a mobile-friendly camera view, live confidence scoring,
+            and backend health monitoring for both desktop and phone browsers.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-6xl">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-8">
         {/* Main Feed Container */}
-        <div className="lg:col-span-8 relative group">
-          <div className="relative rounded-3xl overflow-hidden border-2 border-green-500/20 shadow-[0_0_50px_-12px_rgba(0,255,65,0.2)] bg-black aspect-video">
+        <div className="relative group lg:col-span-8">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-green-500/20 bg-black shadow-[0_0_50px_-12px_rgba(0,255,65,0.2)] sm:aspect-video">
             <video
               ref={videoRef}
               className="hidden"
@@ -241,7 +248,7 @@ const HandTracker = () => {
             
             {!isCameraStarted && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-                <div className="flex flex-col items-center space-y-4 px-8 text-center text-white">
+                <div className="flex max-w-sm flex-col items-center space-y-4 px-6 text-center text-white sm:px-8">
                   {cameraError ? (
                     <>
                       <div className="h-12 w-12 bg-red-500/20 rounded-full flex items-center justify-center border border-red-500/50">
@@ -250,7 +257,7 @@ const HandTracker = () => {
                       <p className="text-red-400 font-medium max-w-sm">{cameraError}</p>
                       <button 
                         onClick={() => window.location.reload()}
-                        className="mt-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-sm font-bold transition-all border border-white/10"
+                        className="mt-2 rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-bold transition-all hover:bg-white/20"
                       >
                         Try Again
                       </button>
@@ -266,28 +273,28 @@ const HandTracker = () => {
             )}
 
             {/* Float Overlay */}
-            <div className="absolute top-4 left-4 flex gap-2">
-              <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md border ${
+            <div className="absolute left-3 top-3 flex max-w-[calc(100%-1.5rem)] gap-2 sm:left-4 sm:top-4">
+              <div className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md sm:text-xs ${
                 backendStatus === "online" ? "bg-green-500/10 border-green-500/50 text-green-400" : "bg-red-500/10 border-red-500/50 text-red-400"
               }`}>
                 <div className={`h-2 w-2 rounded-full ${backendStatus === "online" ? "bg-green-500 animate-pulse" : "bg-red-500"}`} />
-                <span className="text-xs font-bold uppercase tracking-widest">Backend: {backendStatus}</span>
+                <span>Backend: {backendStatus}</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Analytics Section */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
-          <div className="bg-neutral-900/50 backdrop-blur-xl border border-white/5 rounded-3xl p-6 shadow-2xl space-y-6">
+        <div className="flex flex-col gap-5 lg:col-span-4 lg:gap-6">
+          <div className="space-y-5 rounded-[28px] border border-white/8 bg-neutral-900/60 p-4 shadow-2xl backdrop-blur-xl sm:p-6">
             <div className="flex items-center gap-3">
               <Activity className="text-green-500 h-5 w-5" />
               <h2 className="text-lg font-bold">Live AI Analysis</h2>
             </div>
             
             <div className="space-y-1">
-              <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">Detected Gesture</p>
-              <div className="text-4xl font-black text-white truncate h-12">
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-500 sm:text-xs">Detected Gesture</p>
+              <div className="min-h-10 text-2xl font-black text-white sm:min-h-12 sm:text-4xl">
                 {prediction}
               </div>
               {predictionError && (
@@ -297,7 +304,7 @@ const HandTracker = () => {
 
             <div className="space-y-4">
                <div className="flex justify-between items-end">
-                 <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">AI Confidence</p>
+                 <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-500 sm:text-xs">AI Confidence</p>
                  <span className="text-green-500 font-mono font-bold">{(confidence * 100).toFixed(1)}%</span>
                </div>
                <div className="h-3 bg-neutral-800 rounded-full overflow-hidden">
@@ -310,11 +317,11 @@ const HandTracker = () => {
             </div>
           </div>
 
-          <div className="bg-neutral-900/50 backdrop-blur-xl border border-white/5 rounded-3xl p-6 shadow-2xl">
-             <h3 className="text-sm font-bold text-gray-400 mb-4 uppercase tracking-widest">Supported Gestures</h3>
-             <div className="grid grid-cols-2 gap-2">
+          <div className="rounded-[28px] border border-white/8 bg-neutral-900/60 p-4 shadow-2xl backdrop-blur-xl sm:p-6">
+             <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-gray-400 sm:text-sm">Supported Gestures</h3>
+             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {["call", "victory", "good luck", "ok", "rockon", "loser"].map((gesture) => (
-                  <div key={gesture} className="flex items-center gap-2 bg-black/40 px-3 py-2 rounded-xl border border-white/5">
+                  <div key={gesture} className="flex items-center gap-2 rounded-xl border border-white/5 bg-black/40 px-3 py-2">
                     <CheckCircle2 className="h-4 w-4 text-green-500/50" />
                     <span className="text-xs text-gray-300 font-medium uppercase">{gesture}</span>
                   </div>
@@ -322,6 +329,7 @@ const HandTracker = () => {
              </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
